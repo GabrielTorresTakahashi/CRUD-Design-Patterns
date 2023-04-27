@@ -1,14 +1,9 @@
-import Sidebar from "@/components/Sidebar";
-import { Flex } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-export default function Dashboard(){
-  return(
-    <Flex backgroundColor="gray.300" height="100vh">
-        <Sidebar/>
-      <Flex>
-
-      </Flex>
-            
-    </Flex>
-  )
+export default function Dashboard() {
+  const router = useRouter();
+  useEffect(() => {
+    router.push(`/dashboard`)
+  }, []);
 }
