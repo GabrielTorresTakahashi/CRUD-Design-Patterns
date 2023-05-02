@@ -24,13 +24,14 @@ export default function Sidebar() {
     const isActiveConfig = router.pathname === "/config";
 
     return (
-        <Box my="10vh">
+        <Box>
             <Flex
-                mt="100px"
+                mt="2vh"
                 position="absolute"
                 as="aside"
-                w="72"
+                w="25vw"
                 bgColor="white"
+                h="85vh"
                 py="8"
                 mx="6"
                 shadow="0 0 20px rgba(0, 0, 0, 0.05)"
@@ -103,27 +104,25 @@ export default function Sidebar() {
                         </Text>
                     </Link>
                 </VStack>
-                <>
-                    <VStack spacing="4" pr="8" mt={8} alignItems="stretch">
-                        <Text fontWeight="bold" color="gray.700" fontSize="small" px={8}>
-                            SISTEMA
+                <VStack spacing="4" pr="8" mt={8} alignItems="stretch">
+                    <Text fontWeight="bold" color="gray.700" fontSize="small" px={8}>
+                        SISTEMA
+                    </Text>
+                    <Link
+                        href={"/config"}
+                        display="flex"
+                        alignItems="center"
+                        py="1"
+                        pl={8}
+                        color={isActiveConfig ? "purple.500" : "gray.500"}
+                        borderLeft={isActiveConfig ? "3px solid" : "transparent"}
+                    >
+                        <RiSettings2Line size="20" />
+                        <Text ml="4" fontSize="medium" fontWeight="medium">
+                            Configuração
                         </Text>
-                        <Link
-                            href={"/config"}
-                            display="flex"
-                            alignItems="center"
-                            py="1"
-                            pl={8}
-                            color={isActiveConfig ? "purple.500" : "gray.500"}
-                            borderLeft={isActiveConfig ? "3px solid" : "transparent"}
-                        >
-                            <RiSettings2Line size="20" />
-                            <Text ml="4" fontSize="medium" fontWeight="medium">
-                                Configuração
-                            </Text>
-                        </Link>
-                    </VStack>
-                </>
+                    </Link>
+                </VStack>
             </Flex>
         </Box>
     );

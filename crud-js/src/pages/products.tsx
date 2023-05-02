@@ -1,21 +1,37 @@
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import Title from "@/components/Title";
-import { Flex, Text, } from "@chakra-ui/react";
-import React from "react";
+import { Box, Flex, Grid, GridItem, Skeleton, Text, } from "@chakra-ui/react";
+import React, { useEffect } from "react";
 
 export default function Products() {
+    const handleGetProducts = async ()=>{
+        
+    }
+
+    useEffect(()=>{
+        handleGetProducts();
+    },[]);
     return (
         <Flex backgroundColor="pink.100" height="100vh">
             <Title title={"Produtos"} />
-            <Navbar />
-            <Sidebar />
-            <Flex mt="100" ml="350" flexDir="column">
-                <Flex w="100vw">
-                    <Text>Produtos</Text>
+            <Flex alignSelf="start" flexDir="column">
+                <Navbar />
+                <Sidebar />
+                <Flex flexDir="row" w="100vw" ml="30vw" mt="10vh">
+                    <Text
+                        position="absolute"
+                        top="13vh"
+                        fontWeight="semibold"
+                        fontSize="22">
+                        Produtos
+                    </Text>
+                    <Box bgColor="white" w="68vw" h="70vh" position="absolute">
+
+                    </Box>
                 </Flex>
-                <Flex w="75vw" bgColor="white" h="75vh">
-                </Flex>
+            </Flex>
+            <Flex>
             </Flex>
         </Flex>
     )

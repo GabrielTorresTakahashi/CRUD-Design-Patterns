@@ -6,10 +6,10 @@ import React from "react";
 
 export default function Dashboard() {
     return (
-        <Flex backgroundColor="green.100" height="100vh">
-            <Title title={"Dashboard"}/>
+        <Flex backgroundColor="pink.100" height="100vh">
+            <Title title={"Dashboard"} />
+            <Navbar />
             <Flex alignSelf="start" flexDir="column">
-                <Navbar />
                 <Box my="10vh">
                     <Sidebar />
                 </Box>
