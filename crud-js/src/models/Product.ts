@@ -1,18 +1,16 @@
-import mongoose from "@/db/connection";
-import { Model } from "mongoose";
+import { Schema, model, models } from 'mongoose';
 
-interface IProduct{
-    name: String,
-    price: String,
-    description: String
-}
-
-const  ProductSchema = new mongoose.Schema<IProduct>({
-    name: {type: String, default:null},
-    price: {type: String, default:null},
-    description: {type: String, default:null}
+const productSchema = new Schema({
+    name: {
+        type: String,
+        default: null
+    },
+    email: {
+        type: String,
+        default: null
+    },
 });
 
-const Product: Model<IProduct> = mongoose.model("Product", ProductSchema);
+const Product = models.Product || model('Product', productSchema);
 
 export default Product;
