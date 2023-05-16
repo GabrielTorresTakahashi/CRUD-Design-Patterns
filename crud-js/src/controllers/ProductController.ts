@@ -11,6 +11,11 @@ class ProductController {
         await connectMongo()
         return await Product.find()
     }
+
+    async create(product: any) {
+        await connectMongo();
+        return Product.create(product)
+    }
 }
 
 export default new ProductController();

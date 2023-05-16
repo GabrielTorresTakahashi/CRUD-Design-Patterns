@@ -5,7 +5,11 @@ const productSchema = new Schema({
         type: String,
         default: null
     },
-    email: {
+    price: {
+        type: String,
+        default: null
+    },
+    description: {
         type: String,
         default: null
     },
