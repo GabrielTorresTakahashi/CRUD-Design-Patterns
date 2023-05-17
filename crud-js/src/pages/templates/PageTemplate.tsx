@@ -1,10 +1,12 @@
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import Title from "@/components/Title";
-import { Flex, Grid, GridItem, Heading } from "@chakra-ui/react";
+import { Button, Flex, Grid, GridItem, Heading } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
-export default function PageTemplate(props:any,{ children }: any) {
-    const title = props.title;
+export default function PageTemplate(props: any) {
+    const { title, destination, buttonText, button, children} = props;
+    const router = useRouter();
     return (
         <>
             <Title title={title} />
@@ -34,6 +36,7 @@ export default function PageTemplate(props:any,{ children }: any) {
                     >
                         <Flex
                             w="100%"
+                            pr="10"
                             justifyContent="space-between">
                             <Heading
                                 size="md"
@@ -41,6 +44,12 @@ export default function PageTemplate(props:any,{ children }: any) {
                             >
                                 {title}
                             </Heading>
+                            {button ?
+                                <Button colorScheme="pink" onClick={() => { router.push(destination) }}>
+                                    {buttonText}
+                                </Button>
+                                : null}
+
                         </Flex>
                     </GridItem>
                     <GridItem

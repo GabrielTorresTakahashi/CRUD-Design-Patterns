@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const connectMongo = async () => mongoose.connect(
-    "mongodb://127.0.0.1:27017/crudjs",
+    "mongodb+srv://gabrielspot1234:Spot2002@freecluster.3q26o85.mongodb.net/",
     {dbName: 'crudjs'}
 );
 
