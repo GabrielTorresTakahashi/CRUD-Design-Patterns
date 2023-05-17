@@ -8,7 +8,7 @@ export default async function readAll(
 ) {
     try {
         const product = await ProductController.create(req.body)
-        res.json({ product });
+        res.json({ ...product });
     } catch (error) {
         console.log(error);
         res.json({ error });
