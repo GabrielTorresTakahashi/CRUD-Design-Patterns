@@ -9,8 +9,9 @@ export default async function deleteOne(
     res: NextApiResponse<any>
 ) {
     try {
-        const { id } = req.params
-        const product = await ProductController.deleteOne(id);
+        const { id } = req.query
+        if (!id) throw new Error()
+        const product = await ProductController.deleteOne(<string>id);
         res.json({ product });
     } catch (error) {
         console.log(error);

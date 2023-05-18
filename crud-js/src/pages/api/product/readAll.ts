@@ -7,7 +7,7 @@ export default async function readAll(
 ) {
     try {
         const product = await ProductController.readAll()
-        res.json({ product });
+        res.send(product);
     } catch (error) {
         console.log(error);
         res.json({ error });

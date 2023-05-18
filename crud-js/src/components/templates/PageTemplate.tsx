@@ -5,7 +5,7 @@ import { Button, Flex, Grid, GridItem, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 export default function PageTemplate(props: any) {
-    const { title, destination, buttonText, button, children} = props;
+    const { title, destination, buttonText, button, children } = props;
     const router = useRouter();
     return (
         <>
@@ -62,8 +62,8 @@ export default function PageTemplate(props: any) {
                             py="4"
                             shadow="0 0 20px rgba(0, 0, 0, 0.05)"
                             borderRadius={4}
-                            justifyContent={'center'}
-                            h="66vh"
+                            // justifyContent={'center'}
+                            h="lg"
                         >
                             {children}
                         </Flex>

@@ -8,17 +8,16 @@ export default function Products() {
     const toast = useToast();
     const [name, setName] = useState("")
     const [submitting, setSubmitting] = useState(false)
-    const [price, setPrice] = useState("")
     const [description, setDescription] = useState("")
     const submitForm = async () => {
         setSubmitting(true)
         try {
-            if(!name || !price || !description) throw new Error()
-            const res = await axios.post("http://localhost:3000/api/product/save", { name, price, description })
+            if (!name || !description) throw new Error()
+            await axios.post("http://localhost:3000/api/category/save", { name, description })
             toast({
                 title: "Info",
                 status: "info",
-                description: "Produto cadastrado"
+                description: "Categoria cadastrada"
             })
         } catch (error) {
             toast({
@@ -29,17 +28,13 @@ export default function Products() {
         } finally { setSubmitting(false) }
     }
     return (
-        <PageTemplate title="Cadastrar Produto" button={false} buttonText="Cadastrar Produto" destination="/products/cadastrar">
+        <PageTemplate title="Cadastrar Categoria">
             <Flex w="100%" p={8}>
                 <FormControl>
                     <Grid templateColumns={"repeat(2, 1fr)"} gap={16}>
                         <GridItem>
                             <FormLabel>Nome</FormLabel>
                             <Input onChange={(e) => setName(e.target.value)} placeholder="Ex: Tênis preto" />
-                        </GridItem>
-                        <GridItem>
-                            <FormLabel>Preço</FormLabel>
-                            <Input onChange={(e) => setPrice(e.target.value)} type='number' placeholder="16,99" />
                         </GridItem>
                         <GridItem colSpan={2}>
                             <FormLabel>Descrição</FormLabel>
