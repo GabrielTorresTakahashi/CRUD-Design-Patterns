@@ -1,21 +1,33 @@
-import React, { useEffect, useState } from "react";
-import PageTemplate from "../../components/templates/PageTemplate";
+import React, { useMemo, useState } from "react";
+import PageTemplate from "../../../components/templates/PageTemplate";
 import { Button, Flex, FormControl, FormHelperText, FormLabel, Grid, GridItem, Input, Text, Textarea, useToast } from "@chakra-ui/react";
-import axios from "axios";
 import { useRouter } from "next/router";
+import api from "@/services/api";
 
 export default function CadastrarProduto() {
     const router = useRouter();
     const toast = useToast();
-    const [name, setName] = useState("")
-    const [submitting, setSubmitting] = useState(false)
-    const [price, setPrice] = useState("")
-    const [description, setDescription] = useState("")
+    const [product, setProduct] = useState<any>();
+    const [name, setName] = useState("");
+    const [submitting, setSubmitting] = useState(false);
+    const [price, setPrice] = useState("");
+    const [description, setDescription] = useState("");
+    const getProductById = async () => {
+        const res = await api.get(`product/readOne/${router.query.id}`)
+        if (res.data.error) return;
+        setProduct(res.data)
+        setName(res.data.name)
+        setPrice(res.data.price)
+        setDescription(res.data.description)
+    }
+    useMemo(() => {
+        getProductById();
+    }, [router.query])
     const submitForm = async () => {
         setSubmitting(true)
         try {
-            if(!name || !price || !description) throw new Error()
-            const res = await axios.post("http://localhost:3000/api/product/save", { name, price, description })
+            if (!name || !price || !description || !product) throw new Error()
+            const res = await api.patch(`product/update/${product._id}`, { name, price, description })
             toast({
                 title: "Info",
                 status: "info",
@@ -37,15 +49,15 @@ export default function CadastrarProduto() {
                     <Grid templateColumns={"repeat(2, 1fr)"} gap={16}>
                         <GridItem>
                             <FormLabel>Nome</FormLabel>
-                            <Input onChange={(e) => setName(e.target.value)} placeholder="Ex: Tênis preto" />
+                            <Input onChange={(e) => setName(e.target.value)} value={name} placeholder="Ex: Tênis preto" />
                         </GridItem>
                         <GridItem>
                             <FormLabel>Preço</FormLabel>
-                            <Input onChange={(e) => setPrice(e.target.value)} type='number' placeholder="16,99" />
+                            <Input onChange={(e) => setPrice(e.target.value)} value={price} type='number' placeholder="16,99" />
                         </GridItem>
                         <GridItem colSpan={2}>
                             <FormLabel>Descrição</FormLabel>
-                            <Textarea resize={"none"} onChange={(e) => setDescription(e.target.value)} placeholder="Descrição do produto" />
+                            <Textarea resize={"none"} onChange={(e) => setDescription(e.target.value)} value={description} placeholder="Descrição do produto" />
                         </GridItem>
                         <GridItem>
                             <Button

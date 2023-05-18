@@ -7,9 +7,10 @@ export default async function readById(
     res: NextApiResponse<any>
 ) {
     try {
-        const { id } = req.params;
-        const product = await ProductController.readById(id);
-        res.json({ product });
+        const { id } = req.query;
+        console.log(id)
+        const product = await ProductController.readById(<string>id);
+        res.json(product);
     } catch (error) {
         console.log(error);
         res.json({ error });
