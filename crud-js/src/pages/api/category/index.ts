@@ -8,9 +8,15 @@ export default async function readAll(
     res: NextApiResponse<any>
 ) {
     try {
-        await connection();
-        const product = await Product.create({});
-        res.json({ product });
+        res.json({
+            "routes": [
+                { method: "GET", route: "/readAll" },
+                { method: "POST", route: "/save" },
+                { method: "GET", route: "/readOne/:id" },
+                { method: "PATCH", route: "/updateOne/:id" },
+                { method: "DELTETE", route: "/deleteOne/:id" },
+            ]
+        });
     } catch (error) {
         console.log(error);
         res.json({ error });

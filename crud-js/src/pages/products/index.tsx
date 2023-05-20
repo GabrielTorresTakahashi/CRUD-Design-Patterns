@@ -15,7 +15,11 @@ export default function Products() {
             const res = await axios.get("http://localhost:3000/api/product/readAll")
             setProducts(res.data)
         } catch (e) {
-
+            toast({
+                title: "Erro",
+                status: "error",
+                description: "Não foi possível obter os dados"
+            })
         }
     }
 

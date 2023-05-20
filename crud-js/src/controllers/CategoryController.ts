@@ -1,7 +1,7 @@
 import connectMongo from "@/db/connection";
-import Category from "@/models/Product";
+import Category from "@/models/Category";
 
-class ProductController {
+class CategoryController {
     async saveEmpty() {
         await connectMongo()
         return await Category.create()
@@ -34,4 +34,4 @@ class ProductController {
 
 }
 
-export default new ProductController();
+export default new CategoryController();

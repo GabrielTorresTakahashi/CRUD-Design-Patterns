@@ -9,14 +9,12 @@ export default async function readAll(
 ) {
     try {
         res.json({
-            "Rotas Disponíveis": [
-                "/saveEmpty",
-                "/readAll",
-                "/save",
-                "/readOne/:id",
-                "/deleteAll",
-                "/updateOne/:id",
-                "/deleteOne/:id"
+            "routes": [
+                { method: "GET", route: "/readAll" },
+                { method: "POST", route: "/save" },
+                { method: "GET", route: "/readOne/:id" },
+                { method: "PATCH", route: "/updateOne/:id" },
+                { method: "DELTETE", route: "/deleteOne/:id" },
             ]
         });
     } catch (error) {

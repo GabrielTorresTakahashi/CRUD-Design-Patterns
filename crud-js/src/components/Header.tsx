@@ -43,12 +43,12 @@ export default function Header() {
                     DESIGN PATTERNS
                 </Text>
             </Flex>
-            <Flex>
-                <Link>
+            <Link href={"/nos"}>
+                <Flex direction={"row"} alignItems="center" gap={2}>
                     <RiGroupFill />
                     Integrantes do Grupo
-                </Link>
-            </Flex>
+                </Flex>
+            </Link>
         </Flex>
     )
 }

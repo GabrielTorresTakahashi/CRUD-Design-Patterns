@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import PageTemplate from "../../components/templates/PageTemplate";
 import { Button, Flex, FormControl, FormHelperText, FormLabel, Grid, GridItem, Input, Text, Textarea, useToast } from "@chakra-ui/react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function Products() {
-    const title = "Produtos"
+    const router = useRouter()
     const toast = useToast();
     const [name, setName] = useState("")
     const [submitting, setSubmitting] = useState(false)
@@ -19,6 +20,7 @@ export default function Products() {
                 status: "info",
                 description: "Categoria cadastrada"
             })
+            router.push("/categories")
         } catch (error) {
             toast({
                 title: "Erro!",
@@ -34,11 +36,11 @@ export default function Products() {
                     <Grid templateColumns={"repeat(2, 1fr)"} gap={16}>
                         <GridItem>
                             <FormLabel>Nome</FormLabel>
-                            <Input onChange={(e) => setName(e.target.value)} placeholder="Ex: Tênis preto" />
+                            <Input onChange={(e: any) => setName(e.target.value)} placeholder="Ex: Sapatos" />
                         </GridItem>
                         <GridItem colSpan={2}>
                             <FormLabel>Descrição</FormLabel>
-                            <Textarea resize={"none"} onChange={(e) => setDescription(e.target.value)} placeholder="Descrição do produto" />
+                            <Textarea resize={"none"} onChange={(e: any) => setDescription(e.target.value)} placeholder="Descrição da categoria" />
                         </GridItem>
                         <GridItem>
                             <Button

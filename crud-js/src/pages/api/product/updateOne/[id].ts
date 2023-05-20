@@ -7,7 +7,7 @@ export default async function updateProduct(
     res: NextApiResponse<any>
 ) {
     try {
-        const { id } = req.params;
+        const { id } = req.query;
         const updateProduct = req.body;
         const product = await ProductController.updateProduct(id, updateProduct);
         res.json({ product });

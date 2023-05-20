@@ -7,34 +7,34 @@ import api from "@/services/api";
 export default function CadastrarProduto() {
     const router = useRouter();
     const toast = useToast();
-    const [product, setProduct] = useState<any>();
+    const [category, setCategory] = useState<any>();
     const [name, setName] = useState("");
     const [submitting, setSubmitting] = useState(false);
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
-    const getProductById = async () => {
-        const res = await api.get(`product/readOne/${router.query.id}`)
+    const getCategoryById = async () => {
+        const res = await api.get(`category/readOne/${router.query.id}`)
         if (res.data.error) return;
-        setProduct(res.data)
+        setCategory(res.data)
         setName(res.data.name)
-        setPrice(res.data.price)
         setDescription(res.data.description)
     }
     useMemo(() => {
-        getProductById();
+        getCategoryById();
     }, [router.query])
+
     const submitForm = async () => {
         setSubmitting(true)
-        console.log(name, price, description, product)
+        console.log(name, price, description, category)
         try {
-            if (!name || !price || !description || !product) throw new Error()
-            const res = await api.patch(`product/updateOne/${product._id}`, { name, price, description })
+            if (!name || !description || !category) throw new Error()
+            const res = await api.patch(`category/updateOne/${category._id}`, { name, description })
             toast({
                 title: "Info",
                 status: "info",
-                description: "Produto Atualizado"
+                description: "Categoria Atualizada"
             })
-            router.push("/products")
+            router.push("/categories")
         } catch (error) {
             toast({
                 title: "Erro!",
@@ -51,10 +51,6 @@ export default function CadastrarProduto() {
                         <GridItem>
                             <FormLabel>Nome</FormLabel>
                             <Input onChange={(e: any) => setName(e.target.value)} value={name} placeholder="Ex: Tênis preto" />
-                        </GridItem>
-                        <GridItem>
-                            <FormLabel>Preço</FormLabel>
-                            <Input onChange={(e: any) => setPrice(Math.abs((e.target.value)).toString())} value={price} type='number' placeholder="16,99" />
                         </GridItem>
                         <GridItem colSpan={2}>
                             <FormLabel>Descrição</FormLabel>

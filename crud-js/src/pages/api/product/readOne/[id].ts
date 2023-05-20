@@ -8,7 +8,6 @@ export default async function readById(
 ) {
     try {
         const { id } = req.query;
-        console.log(id)
         const product = await ProductController.readById(<string>id);
         res.json(product);
     } catch (error) {

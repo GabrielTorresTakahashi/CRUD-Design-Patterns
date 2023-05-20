@@ -9,12 +9,12 @@ export default async function deleteOne(
     res: NextApiResponse<any>
 ) {
     try {
+        if (req.method !== "DELETE") throw new Error("Use method DELETE for this route");
         const { id } = req.query
         if (!id) throw new Error()
         const product = await ProductController.deleteOne(<string>id);
         res.json({ product });
     } catch (error) {
-        console.log(error);
-        res.json({ error });
+        res.json(error);
     }
 }
