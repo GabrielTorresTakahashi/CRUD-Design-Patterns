@@ -41,8 +41,11 @@ export default function Products() {
                     </Thead>
                     <Tbody>
                         {products.length > 0 ?
-                            products.map((item: any) =>
-                                <ProductLi item={item} />
+                            products.map((item: any) => {
+                                if (item.name != null)
+                                    return <ProductLi item={item} />
+                                return null
+                            }
                             )
                             : null}
                     </Tbody>

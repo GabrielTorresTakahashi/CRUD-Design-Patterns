@@ -2,11 +2,6 @@ import connectMongo from "@/db/connection";
 import Category from "@/models/Category";
 
 class CategoryController {
-    async saveEmpty() {
-        await connectMongo()
-        return await Category.create()
-    }
-
     async readAll() {
         await connectMongo()
         return await Category.find()
