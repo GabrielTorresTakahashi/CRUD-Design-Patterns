@@ -1,6 +1,6 @@
-import { Schema, model, models } from 'mongoose';
+import mongoose from 'mongoose';
 
-const productSchema = new Schema({
+const productSchema = new mongoose.Schema({
     name: {
         type: String,
         default: null,
@@ -14,11 +14,15 @@ const productSchema = new Schema({
         default: null,
     },
     category: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
+        autopopulate: true,
         default: null,
     },
 });
 
-const Product = models.Product || model('Product', productSchema);
+productSchema.plugin(require('mongoose-autopopulate'));
+
+const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
 
 export default Product;

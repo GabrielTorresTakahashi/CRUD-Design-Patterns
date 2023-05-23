@@ -8,7 +8,8 @@ import api from "@/services/api";
 export default function CadastrarProduto() {
     const router = useRouter();
     const toast = useToast();
-    const [categories, setCategories] = useState()
+    const [categories, setCategories] = useState<Array<any>>([])
+    const [category, setCategory] = useState<any>("")
     const [name, setName] = useState("")
     const [submitting, setSubmitting] = useState(false)
     const [price, setPrice] = useState("")
@@ -16,8 +17,8 @@ export default function CadastrarProduto() {
     const submitForm = async () => {
         setSubmitting(true)
         try {
-            if (!name || !price || !description) throw new Error()
-            const res = await axios.post("http://localhost:3000/api/product/save", { name, price, description })
+            if (!name || !price || !description || !category) throw new Error()
+            const res = await axios.post("http://localhost:3000/api/product/save", { name, price, description, category })
             toast({
                 title: "Info",
                 status: "info",
@@ -35,13 +36,16 @@ export default function CadastrarProduto() {
 
     const getCategories = async () => {
         const categories = await api.get("category/readAll");
-
+        setCategories(categories.data)
     }
+    useEffect(() => {
+        getCategories()
+    }, [])
     return (
         <PageTemplate title="Cadastrar Produto" button={false} buttonText="Cadastrar Produto" destination="/products/cadastrar">
             <Flex w="100%" p={8}>
-                <FormControl>
-                    <Grid templateColumns={"repeat(2, 1fr)"} gap={16}>
+                <FormControl isRequired>
+                    <Grid templateColumns={"repeat(2, 1fr)"} gap={8}>
                         <GridItem>
                             <FormLabel>Nome</FormLabel>
                             <Input onChange={(e: any) => setName(e.target.value)} placeholder="Ex: Tênis preto" />
@@ -52,22 +56,25 @@ export default function CadastrarProduto() {
                         </GridItem>
                         <GridItem colSpan={2}>
                             <FormLabel>Categoria</FormLabel>
-                            <Select>
-
+                            <Select placeholder="-Selecione-" onChange={(e) => setCategory(e.target.value)}>
+                                {categories.map((item: any) => <option value={item._id}>{item.name}</option>)}
                             </Select>
                         </GridItem>
                         <GridItem colSpan={2}>
                             <FormLabel>Descrição</FormLabel>
                             <Textarea resize={"none"} onChange={(e: any) => setDescription(e.target.value)} placeholder="Descrição do produto" />
                         </GridItem>
-                        <GridItem>
-                            <Button
-                                colorScheme="pink"
-                                onClick={() => { submitForm() }}
-                                isLoading={submitting}
-                            >
-                                Enviar
-                            </Button>
+                        <GridItem colSpan={2}>
+                            <Flex w="100%" justifyContent={"center"}>
+                                <Button
+                                    w="50%"
+                                    colorScheme="pink"
+                                    onClick={() => { submitForm() }}
+                                    isLoading={submitting}
+                                >
+                                    Enviar
+                                </Button>
+                            </Flex>
                         </GridItem>
                     </Grid>
                 </FormControl>

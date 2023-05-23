@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PageTemplate from "../../components/templates/PageTemplate";
 import axios from "axios";
-import { Button, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useToast } from "@chakra-ui/react";
-import { HiPencil, HiTrash } from "react-icons/hi"
+import { Table, TableContainer, Tbody, Th, Thead, Tr, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import ProductLi from "@/components/ProductLi";
 
@@ -34,13 +33,14 @@ export default function Products() {
                     <Thead>
                         <Tr>
                             <Th>Nome</Th>
+                            <Th>Categoria</Th>
                             <Th>Preço</Th>
                             <Th>Descrição</Th>
                             <Th colSpan={2}>Ações</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {products ?
+                        {products.length > 0 ?
                             products.map((item: any) =>
                                 <ProductLi item={item} />
                             )

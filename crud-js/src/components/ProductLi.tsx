@@ -34,6 +34,7 @@ export default function ProductLi(props: any) {
     return (
         <Tr display={display ? "table-row" : "none"}>
             <Td>{item.name}</Td>
+            <Td>{item.category.name}</Td>
             <Td>R$ {item.price}</Td>
             <Td>{item.description}</Td>
             <Td><Button colorScheme="pink" onClick={() => { handleEditProduct(item._id) }} ><HiPencil /></Button></Td>
