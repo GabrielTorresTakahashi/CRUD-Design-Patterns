@@ -42,9 +42,9 @@ export default function Products() {
                     <Tbody>
                         {products.length > 0 ?
                             products.map((item: any) => {
-                                if (item.name != null)
-                                    return <ProductLi item={item} />
-                                return null
+                                if (item.name != null) {
+                                    return <ProductLi key={item._id} item={item} />
+                                }
                             }
                             )
                             : null}

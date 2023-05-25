@@ -36,8 +36,12 @@ export default function Categories() {
                     </Thead>
                     <Tbody>
                         {products ?
-                            products.map((item: any) =>
-                                <CategoryLi item={item} />)
+                            products.map((item: any) => {
+                                if (item.name != null) {
+                                    return <CategoryLi key={item._id} item={item} />
+                                }
+                                return null
+                            })
                             : null}
                     </Tbody>
                 </Table>
