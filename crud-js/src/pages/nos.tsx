@@ -1,9 +1,20 @@
 import { Box, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageTemplate from "../components/templates/PageTemplate";
+import api from "@/services/api";
 
 export default function Nos() {
     const title = "Nós"
+    const [members, setMembers] = useState<any>([]);
+    const getProducts = async () => {
+        const response = await api.get("member/readAll");
+        setMembers(response.data);
+    }
+
+    useEffect(() => {
+        getProducts();
+    }, [])
+
     return (
         <PageTemplate title={title}>
             <TableContainer w="100%">
@@ -15,31 +26,12 @@ export default function Nos() {
                         </Tr>
                     </Thead>
                     <Tbody fontSize="xl" fontWeight={600}>
-                        <Tr>
-                            <Td>Gabriel Torres Takahashi</Td>
-                            <Td>600601</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Kevin de Souza Lima</Td>
-                            <Td>601969</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Laura Lacort Zimmermann</Td>
-                            <Td>603201</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Renan Palavizini Biazolla</Td>
-                            <Td>608831</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Rebeca Yamanaka Alves Ferreira</Td>
-                            <Td>600482</Td>
-                        </Tr>
-                        <Tr>
-                            <Td>Matheus Aparecido</Td>
-                            <Td>601721</Td>
-                        </Tr>
-
+                        {members.map((member: any) => (
+                            <Tr key={member.id}>
+                                <Td>{member.name}</Td>
+                                <Td>#{member.ra}</Td>
+                            </Tr>
+                        ))}
                     </Tbody>
                 </Table>
             </TableContainer>

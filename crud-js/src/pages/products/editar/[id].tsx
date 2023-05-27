@@ -18,10 +18,10 @@ export default function CadastrarProduto() {
         const res = await api.get(`product/readOne/${router.query.id}`)
         if (res.data.error) return;
         setProduct(res.data)
-        setName(res.data.name)
-        setPrice(res.data.price)
-        setDescription(res.data.description)
-        setCategory(res.data.category._id)
+        setName(res.data?.name)
+        setPrice(res.data?.price)
+        setDescription(res.data?.description)
+        setCategory(res.data?.category?._id)
     }
     const getCategories = async () => {
         const categories = await api.get("category/readAll");

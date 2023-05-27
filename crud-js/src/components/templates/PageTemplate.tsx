@@ -62,7 +62,6 @@ export default function PageTemplate(props: any) {
                             py="4"
                             shadow="0 0 20px rgba(0, 0, 0, 0.05)"
                             borderRadius={4}
-                            // justifyContent={'center'}
                             h="lg"
                         >
                             {children}

@@ -100,7 +100,7 @@ export default function Sidebar() {
                     </Text>
                 </Link>
             </VStack>
-            <>
+            {/* <>
                 <VStack spacing="4" pr="8" mt={8} alignItems="stretch">
                     <Text fontWeight="bold" color="gray.700" fontSize="small" px={8}>
                         SISTEMA
@@ -120,7 +120,7 @@ export default function Sidebar() {
                         </Text>
                     </Link>
                 </VStack>
-            </>
+            </> */}
         </Flex>
     );
 }

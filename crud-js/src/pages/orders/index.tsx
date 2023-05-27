@@ -20,8 +20,8 @@ export default function Orders() {
     }, [])
 
     return (
-        <PageTemplate title={title}>
-            <TableContainer  w="100%">
+        <PageTemplate title={title} destination={"/orders/cadastrar"} buttonText={"Realizar Pedido"} button>
+            <TableContainer w="100%">
                 <Table>
                     <Thead>
                         <Tr>
